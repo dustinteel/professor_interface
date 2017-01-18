@@ -1,0 +1,12 @@
+<h1>{{ className }}</h1>
+<p>Use this form to update the attendance manually for one of your students.</p>
+<form action="/changeattendance" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
+<form> action="/changeattendance" method="post">
+    {% csrf_token %}
+    {{ form2 }}
+    <input type="submit" value="Update Attendance" />
+</form>

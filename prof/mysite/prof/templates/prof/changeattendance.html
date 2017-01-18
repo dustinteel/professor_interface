@@ -1,0 +1,6 @@
+<h1>{{ Class.objects.get(id=1).getName() }}</h1>
+<form action="/changeattendance" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
