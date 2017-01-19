@@ -1,0 +1,7 @@
+graft *
+prune .hg
+prune .hgignore
+prune .ropeproject
+prune .git
+prune .gitignore
+include smart_selects/static/smart-selects/admin/js/*
