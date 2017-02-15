@@ -1,10 +1,10 @@
 from __future__ import unicode_literals
-
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
 import random, string
 from smart_selects.db_fields import ChainedManyToManyField
+from adaptor.model import CsvDbModel
 
 # Create your models here.
 
@@ -14,7 +14,6 @@ class Student(models.Model):
     Student_First_Name = models.CharField(max_length=200)
     Student_Last_Name = models.CharField(max_length=200)
     Student_ID_Number = models.CharField(max_length=200, unique=True)
-    Student_Class = models.ManyToManyField('Class', blank=True)
     Professor = models.ForeignKey(User,null=True)
     def __str__(self):
         return self.Student_Last_Name + ',' + self.Student_First_Name
@@ -47,10 +46,17 @@ class AttendanceRecord(models.Model):
         unique_together = ["Associated_Class", "Date"]
     Associated_Class = models.ForeignKey(Class)
     Date = models.DateField()
-    Present_Students = ChainedManyToManyField(Student, chained_field="Associated_Class", chained_model_field="Student_Class",)
+    Present_Students = ChainedManyToManyField(Student, chained_field="Associated_Class", chained_model_field="class_list", blank=True,)
     def get_associated_class_id(self):
         return self.Associated_Class
     def __str__(self):
         return self.Associated_Class.__str__() + ' on date ' + self.Date.__str__()
+
+#This csvmodel allows the importation of csv files for students
+class StudentCsvModel(CsvDbModel):
+
+    class Meta:
+        dbModel = Student
+        delimiter = ','
    
     

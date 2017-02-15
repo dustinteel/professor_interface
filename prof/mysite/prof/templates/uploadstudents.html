@@ -1,0 +1,7 @@
+<p>Welcome {{request.user.first_name}} {{request.user.last_name}}! Please choose the class you would like to upload students for and choose the .csv file that has that information! </p>
+<form action="uploadstudents/" method="post" enctype="multipart/form-data">{% csrf_token %}
+
+    <input type="file" name="csv_file" />
+    <input type="submit" value="Upload" />
+
+</form>
